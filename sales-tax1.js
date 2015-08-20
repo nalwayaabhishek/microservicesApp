@@ -7,14 +7,26 @@ seneca.add({cmd: 'salestax'}, function(args, callback) {
   callback(null, {total: total});
 });
 
-seneca.add({cmd: 'salestax', country: 'India'}, function(args, callback) {
+seneca.add({cmd: 'salestax', country: 'India'},
+     function(args, callback) {
   var rate = 0.2;
-  seneca.act({cmd: 'salestax', rate: rate, net: args.net});
+  seneca.act({cmd: 'salestax', rate: rate, net: args.net},
+ function (err, result) {
+        callback(null, result);
+      })
+  	
+   
 });
 
-seneca.add({cmd: 'salestax', country: 'USA'}, function(args, callback) {
+seneca.add({cmd: 'salestax', country: 'USA'},
+ function(args, callback) {
   var rate = 0.3;
-  seneca.act({cmd: 'salestax', rate: rate, net: args.net});
+  seneca.act({cmd: 'salestax', rate: rate, net: args.net},
+  	 function (err, result) {
+        callback(null, result);
+      })
+  
+  
 });
 
 seneca.act({cmd:'salestax',  country: 'USA', net: 100}, function(err, result) {
